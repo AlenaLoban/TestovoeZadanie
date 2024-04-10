@@ -1,23 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
+import { library, IconName } from "@fortawesome/fontawesome-svg-core";
 import { far } from "@fortawesome/free-regular-svg-icons";
-import { useState } from "react";
-import "./css/app.css";
+import React, { useState } from "react";
+import "./scss/app.scss";
 
 library.add(far);
 
-function App() {
-  const [randomIcon, setRandomIcon] = useState();
-  const icons = Object.keys(far);
+const App: React.FC = () => {
+  const [randomIcon, setRandomIcon] = useState<IconName>();
 
-  const handleClick = () => {
-    const index = Math.floor(Math.random() * icons.length);
-    for (const key in far) {
-      if (key === icons[index]) {
-        const icon = far[key].iconName;
-        setTimeout(() => setRandomIcon(icon), 3000);
-      }
-    }
+  const handleClick = (): void => {
+    const index = Math.floor(Math.random() * Object.keys(far).length);
+    const icon = far[Object.keys(far)[index]].iconName;
+    setTimeout(() => setRandomIcon(icon), 3000);
   };
 
   return (
@@ -33,6 +28,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;
